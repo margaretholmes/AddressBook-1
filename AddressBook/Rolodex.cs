@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace AddressBook
 {
@@ -66,17 +68,43 @@ namespace AddressBook
         {
             Console.Clear();
             Console.WriteLine("RECIPES!");
-            foreach (RecipeType recipeType in _recipes.Keys)
+          
+
+            string connectionString;
+            connectionString = "Server=localhost;Database=AddressBook;Trusted_Connection=True;";
+
+            SqlConnection connection;
+            connection = new SqlConnection(connectionString);
+
+            try
             {
-                Console.WriteLine(recipeType);
-                List<Recipe> specificRecipes = _recipes[recipeType];
-                foreach (Recipe recipe in specificRecipes)
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.Text;
+
+                command = connection.CreateCommand();
+                command.CommandText = "SELECT RecipeType, RecipeName FROM Recipe";
+                SqlDataReader reader = command.ExecuteReader();
+
+
+                
+
+                while (reader.Read())
                 {
-                    Console.WriteLine($"\t{recipe}");
+                    //int rowId = reader.GetInt32(0);
+                    string type = reader.GetString(0);
+                    string name = reader.GetString(1);
+                    Console.WriteLine($"{type}, {name}");
+                    Console.ReadLine();
+
                 }
-                Console.WriteLine();
             }
-            Console.ReadLine();
+            finally
+            {
+                connection.Dispose();
+            }
+
 
 
         }
@@ -109,20 +137,55 @@ namespace AddressBook
 
         private void DoAddRecipe()
         {
-            Console.Clear();
-            Console.WriteLine("Please enter the title of your recipe.");
-            string title = GetNonEmptyStringFromUser();
-            Recipe recipe = new Recipe(title);
+            string connectionString;
+            connectionString = "Server=localhost;Database=AddressBook;Trusted_Connection=True;";
 
-            Console.WriteLine("What kind of recipe is this?");
-            for (int i = 0; i < (int)RecipeType.UPPER_LIMIT; i++)
+            SqlConnection connection;
+            connection = new SqlConnection(connectionString);
+            try
             {
-                Console.WriteLine($"{i}. {(RecipeType)i}");
+                connection.Open();
+
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.Text;
+
+                Console.Clear();
+
+                Console.WriteLine("What kind of recipe is this?");
+                string type = GetNonEmptyStringFromUser();
+
+                Console.WriteLine("Please enter the title of your recipe.");
+                string name = GetNonEmptyStringFromUser();
+
+
+
+
+
+                command = connection.CreateCommand();
+                command.CommandText = @"
+                    insert into Recipe(RecipeType, RecipeName)
+                    values(@RecipeType, @RecipeName);
+                    ";
+                command.Parameters.AddWithValue("@RecipeType", type);
+                command.Parameters.AddWithValue("@RecipeName", name);
+
+                command.ExecuteNonQuery();
+
+
+
+
             }
-            RecipeType choice = (RecipeType)int.Parse(Console.ReadLine());
-            List<Recipe> specificRecipes = _recipes[choice];
-            specificRecipes.Add(recipe);
+            finally
+            {
+                connection.Dispose();
+            }
+
+
         }
+
+
+
+
 
         private void DoRemoveContact()
         {
@@ -247,9 +310,9 @@ namespace AddressBook
         }
         private MenuOption GetMenuOption()
         {
-            
+
             int choice = GetNumberFromUser();
-            
+
 
             while (choice < 0 || choice >= (int)MenuOption.UPPER_LIMIT) //put the (int) because it's an enum
             {                                                          //not a variable, known at compile time
