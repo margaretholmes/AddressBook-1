@@ -8,7 +8,10 @@ namespace AddressBook
     {
         static void Main(string[] args)
         {
-            //I love this stuff so much
+            //This is the branch version
+            string connectionsString;
+            connectionsString = ConfigurationManager.ConnectionStrings["AddressBook"].ConnectionString;
+
             string name = ConfigurationManager.AppSettings["ApplicationName"];
             Console.WriteLine("WELCOME TO:");
             Console.WriteLine(name);
@@ -19,7 +22,7 @@ namespace AddressBook
 
             
 
-            Rolodex rolodex = new Rolodex();
+            Rolodex rolodex = new Rolodex(connectionsString);
             rolodex.DoStuff();
         }
     }
