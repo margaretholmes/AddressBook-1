@@ -8,6 +8,22 @@ namespace AddressBook
     {
         private string _connectionString;
 
+        public int Count
+        {
+            get
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SELECT COUNT(*) FROM Recipes";
+                    return (int)command.ExecuteScalar();
+
+                }
+            }    
+                
+        }
+
         public RecipesRepository(string connectionString)
         {
             _connectionString = connectionString;
