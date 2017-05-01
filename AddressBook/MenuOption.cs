@@ -1,21 +1,17 @@
-﻿using System;
-
-
-namespace AddressBook
+﻿namespace AddressBook
 {
-    public enum MenuOption              //when C# compiles, these all turn into numbers
+    public enum MenuOption
     {
         Exit,
-        AddPerson,   //AddPerson = 200,  This will set it's number to 200, then next one will default to 201
+        AddPerson,
         AddCompany,
         ListContacts,
         SearchContacts,
         RemoveContact,
         AddRecipe,
-        ListRecipes,
+        ListReceipes,
         SearchEverything,
 
         UPPER_LIMIT
-        
     }
 }

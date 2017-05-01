@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AddressBook
+﻿namespace AddressBook
 {
     public class Recipe : IMatchable
     {
@@ -16,9 +14,7 @@ namespace AddressBook
 
         public override string ToString()
         {
-            return ($"Recipe: {_title}");
-             
-             
+            return $"RECIPE: {_title}";
         }
 
         private string _title;

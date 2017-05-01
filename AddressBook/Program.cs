@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using System.Data.SqlClient;
 
 namespace AddressBook
 {
@@ -8,9 +7,10 @@ namespace AddressBook
     {
         static void Main(string[] args)
         {
-            //This is the branch version
-            string connectionsString;
-            connectionsString = ConfigurationManager.ConnectionStrings["AddressBook"].ConnectionString;
+            string connectionString;
+            connectionString = ConfigurationManager.ConnectionStrings["AddressBook"].ConnectionString;
+
+            string contactsFileName = ConfigurationManager.AppSettings["ContactsDatabaseFileName"];
 
             string name = ConfigurationManager.AppSettings["ApplicationName"];
             Console.WriteLine("WELCOME TO:");
@@ -20,9 +20,7 @@ namespace AddressBook
             Console.WriteLine("Press Enter to continue.");
             Console.ReadLine();
 
-            
-
-            Rolodex rolodex = new Rolodex(connectionsString);
+            Rolodex rolodex = new Rolodex(connectionString, contactsFileName);
             rolodex.DoStuff();
         }
     }
