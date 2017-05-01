@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace AddressBook
 {
-    internal class RecipesRepository
+    public class RecipesRepository
     {
         private string _connectionString;
 
@@ -44,7 +44,7 @@ namespace AddressBook
 
         }
 
-        internal void Create(string title, RecipeType choice)
+        public void Create(string title, RecipeType choice)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
