@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook", "AddressBook\AddressBook.csproj", "{9122586C-5F92-47E6-B1E8-03A05B26A618}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBook.Tests", "AddressBook.Tests\AddressBook.Tests.csproj", "{C09705CF-ED97-4BB3-A438-28D064943104}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9122586C-5F92-47E6-B1E8-03A05B26A618}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9122586C-5F92-47E6-B1E8-03A05B26A618}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9122586C-5F92-47E6-B1E8-03A05B26A618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C09705CF-ED97-4BB3-A438-28D064943104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C09705CF-ED97-4BB3-A438-28D064943104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C09705CF-ED97-4BB3-A438-28D064943104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C09705CF-ED97-4BB3-A438-28D064943104}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
